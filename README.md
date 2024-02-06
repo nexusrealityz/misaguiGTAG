@@ -1,2 +1,2 @@
-# misaguiGTAG
-a gorilla tag cheat gui yes
+# Misa Gui
+a gorilla tag cheat gui made using ShibaGT template cuz im lazy like that
