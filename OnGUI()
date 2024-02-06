@@ -1,0 +1,90 @@
+// gui thingymabob
+public static bool isOpenpls = false;
+
+public static bool lastCondition = false;
+public static bool menutoggle = false;
+
+public static Color bgc = new Color(0f, 0.5f, 0f, 1f);
+public static Color txtc = Color.white;
+public bool canopenmenu = false;
+public bool WASD;
+public bool 
+private void OnGUI()
+{
+    bool isKeyboardCondition = UnityInput.Current.GetKey(KeyCode.Backslash);
+
+    if (isKeyboardCondition && !lastCondition)
+    {
+        isOpenpls = !isOpenpls;
+    }
+    lastCondition = isKeyboardCondition;
+    GUI.color = Color.blue;
+    menutoggle = GUI.Toggle(new Rect(Screen.width - 90, 40, 85, 30), menutoggle, "LongArms");
+    if (menutoggle)
+    {
+        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = GorillaTagger.Instance.headCollider.transform.position - (GorillaTagger.Instance.headCollider.transform.position - GorillaTagger.Instance.leftHandTransform.position) * 1.4f;
+        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = GorillaTagger.Instance.headCollider.transform.position - (GorillaTagger.Instance.headCollider.transform.position - GorillaTagger.Instance.rightHandTransform.position) * 1.4f;
+    }
+    else
+    {
+        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = GorillaTagger.Instance.headCollider.transform.position - (GorillaTagger.Instance.headCollider.transform.position - GorillaTagger.Instance.leftHandTransform.position) * 1f;
+        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = GorillaTagger.Instance.headCollider.transform.position - (GorillaTagger.Instance.headCollider.transform.position - GorillaTagger.Instance.rightHandTransform.position) * 1f;
+    }
+    WASD = GUI.Toggle(new Rect(Screen.width - 90, 60, 85, 30), WASD, "WASD");
+    if (WASD)
+    {
+        GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0.067f, 0f);
+
+        bool W = UnityInput.Current.GetKey(KeyCode.W);
+        bool A = UnityInput.Current.GetKey(KeyCode.A);
+        bool S = UnityInput.Current.GetKey(KeyCode.S);
+        bool D = UnityInput.Current.GetKey(KeyCode.D);
+        bool Space = UnityInput.Current.GetKey(KeyCode.Space);
+        bool Ctrl = UnityInput.Current.GetKey(KeyCode.LeftControl);
+        bool Leftarrow = UnityInput.Current.GetKey(KeyCode.LeftArrow);
+        bool Rightarrow = UnityInput.Current.GetKey(KeyCode.RightArrow);
+
+        if (W)
+        {
+            GorillaTagger.Instance.rigidbody.transform.position += GorillaTagger.Instance.rigidbody.transform.forward * Time.deltaTime * 1f;
+        }
+
+        if (S)
+        {
+            GorillaTagger.Instance.rigidbody.transform.position += GorillaTagger.Instance.rigidbody.transform.forward * Time.deltaTime * -1f;
+        }
+
+        if (A)
+        {
+            GorillaTagger.Instance.rigidbody.transform.position += GorillaTagger.Instance.rigidbody.transform.right * Time.deltaTime * -1f;
+        }
+
+        if (D)
+        {
+            GorillaTagger.Instance.rigidbody.transform.position += GorillaTagger.Instance.rigidbody.transform.right * Time.deltaTime * 1f;
+        }
+
+        if (Space)
+        {
+            GorillaTagger.Instance.rigidbody.transform.position += GorillaTagger.Instance.rigidbody.transform.up * Time.deltaTime * 1f;
+        }
+
+        if (Ctrl)
+        {
+            GorillaTagger.Instance.rigidbody.transform.position += GorillaTagger.Instance.rigidbody.transform.up * Time.deltaTime * -1f;
+        }
+    }
+    else
+    {
+
+    }
+    GUI.Button(new Rect(Screen.width - 90, 80, 85, 30), "Disconnect");
+    {
+        PhotonNetwork.Disconnect();
+    }
+    GUI.Button(new Rect(Screen.width - 90, 80, 85, 30), "Disconnect");
+    {
+        PhotonNetwork.Disconnect();
+    }
+
+}
